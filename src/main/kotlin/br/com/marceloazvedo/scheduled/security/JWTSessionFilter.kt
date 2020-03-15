@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.User
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import java.util.*
@@ -24,10 +25,12 @@ class JWTSessionFilter : AbstractAuthenticationProcessingFilter {
     override fun attemptAuthentication(request: HttpServletRequest?, response: HttpServletResponse?): Authentication {
         val sessionUser = ObjectMapper()
                 .readValue(request!!.inputStream, SessionUserDTO::class.java)
-
         return authenticationManager
                 .authenticate(
-                        UsernamePasswordAuthenticationToken(sessionUser.email, sessionUser.password, emptyList()))
+                        UsernamePasswordAuthenticationToken(
+                                sessionUser.email,
+                                sessionUser.password,
+                                emptyList()))
     }
 
     override fun successfulAuthentication(request: HttpServletRequest?,

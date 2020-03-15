@@ -26,7 +26,8 @@ class SecurityConfig(private val userDetailsService: UserDetailsService) : WebSe
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/users").permitAll() // create a user
+                .antMatchers("/h2").permitAll() // H2 database access
+                .antMatchers(HttpMethod.POST,"/clients").permitAll() // create a user
                 .antMatchers(HttpMethod.POST, "/session").permitAll() // get session
                 .anyRequest().authenticated()
                 .and()

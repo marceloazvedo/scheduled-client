@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service
 class UserServiceImpl constructor(private val userRepository: UserRepository): UserService {
 
     override fun findByEmail(email: String): User = userRepository.findByEmail(email)
+
+    override fun create(user: User): User = userRepository.save(user)
 }
