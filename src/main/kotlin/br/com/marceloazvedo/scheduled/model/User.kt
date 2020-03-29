@@ -7,6 +7,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
+@Table(name="appuser")
 @Inheritance(strategy = InheritanceType.JOINED)
 open class User {
     @Id @GeneratedValue

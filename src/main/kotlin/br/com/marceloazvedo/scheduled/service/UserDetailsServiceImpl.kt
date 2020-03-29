@@ -1,6 +1,5 @@
 package br.com.marceloazvedo.scheduled.service
 
-import br.com.marceloazvedo.scheduled.model.User
 import org.springframework.context.annotation.Bean
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -18,9 +17,10 @@ class UserDetailsServiceImpl(private val userService: UserService) : UserDetails
 
     override fun loadUserByUsername(email: String): UserDetails {
         val user = userService.findByEmail(email)
+        println("User: ${user.email} with id: ${user.id}")
         if (user.id == null)
             throw UsernameNotFoundException(email)
-        return SpringUser(user.email, passwordEncoder.encode(user.password), emptyList())
+        return SpringUser(user.email, user.password, emptyList())
     }
 
     @Bean
