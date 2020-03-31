@@ -18,4 +18,8 @@ class ClientServiceImpl : ClientService {
         client.password = passwordEncoder.encode(client.password)
         return clientRepository.save(client)
     }
+
+    override fun findAll(): List<ClientUser> {
+        return clientRepository.findAll()
+    }
 }

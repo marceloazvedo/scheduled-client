@@ -9,7 +9,8 @@ class RoleGroup {
     var id: Long? = null
     var name: String? = null
     var description: String? = null
-//    var permittedResources: List<ApplicationModule>? = null
+    @Transient
+    var permittedResources: List<ApplicationModule>? = null
     @Enumerated(EnumType.STRING)
     var userType: UserType? = null
 }

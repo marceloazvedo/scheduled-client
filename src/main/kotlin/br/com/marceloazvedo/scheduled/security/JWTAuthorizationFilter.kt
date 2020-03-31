@@ -14,7 +14,7 @@ class JWTAuthorizationFilter(authenticationManager: AuthenticationManager?) : Ba
 
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {
         val header = request.getHeader(SecurityConstant.HEADER_STRING)
-        if (header != null && !header.startsWith(SecurityConstant.TOKEN_PREFIX)) {
+        if (header != null && header.startsWith(SecurityConstant.TOKEN_PREFIX)) {
             val authentication: UsernamePasswordAuthenticationToken? = getAuthenticationToken(request)
             SecurityContextHolder.getContext().authentication = authentication
             chain.doFilter(request, response)
