@@ -17,7 +17,6 @@ class UserDetailsServiceImpl(private val userService: UserService) : UserDetails
 
     override fun loadUserByUsername(email: String): UserDetails {
         val user = userService.findByEmail(email)
-        println("User: ${user.email} with id: ${user.id}")
         if (user.id == null)
             throw UsernameNotFoundException(email)
         return SpringUser(user.email, user.password, emptyList())
